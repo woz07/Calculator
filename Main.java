@@ -226,6 +226,7 @@ public class Calculator extends JFrame {
                 output.setText("");
                 num1 = "";
                 num2 = "";
+                ans = "";
                 addBtn = false;
                 minusBtn = false;
                 timesBtn = false;

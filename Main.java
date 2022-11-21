@@ -22,8 +22,10 @@ public class Calculator extends JFrame {
     JButton equal = new JButton("=");
     JButton clear = new JButton("C");
     JButton sqrtRoot = new JButton("√");
+    JButton getAns = new JButton("get last");
     String num2 = "";
     String num1 = "";
+    String ans = "";
     Boolean addBtn = false;
     Boolean minusBtn = false;
     Boolean timesBtn = false;
@@ -73,6 +75,8 @@ public class Calculator extends JFrame {
         output.setBackground(Color.white);
         sqrtRoot.setPreferredSize(new Dimension(50, 50));
         sqrtRoot.setBackground(Color.white);
+        getAns.setPreferredSize(new Dimension(100, 50));
+        getAns.setBackground(Color.white);
 
         panel.add(output);
         panel.add(b0);
@@ -92,6 +96,35 @@ public class Calculator extends JFrame {
         panel.add(equal);
         panel.add(clear);
         panel.add(sqrtRoot);
+        panel.add(getAns);
+
+        getAns.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!addBtn) {
+                    if (!minusBtn) {
+                        if (!timesBtn) {
+                            if (!divideBtn) {
+                                num1 = ans;
+                                output.setText(num1);
+                            } else {
+                                num2 = ans;
+                                output.setText(num2);
+                            }
+                        } else {
+                            num2 = ans;
+                            output.setText(num2);
+                        }
+                    } else {
+                        num2 = ans;
+                        output.setText(num2);
+                    }
+                } else {
+                    num2 = ans;
+                    output.setText(num2);
+                }
+            }
+        });
 
         sqrtRoot.addActionListener(new ActionListener() {
             @Override
@@ -158,20 +191,27 @@ public class Calculator extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (addBtn) {
                     output.setText(String.valueOf(Integer.parseInt(num1) + Integer.parseInt(num2)));
+                    ans = String.valueOf(Integer.parseInt(num1) + Integer.parseInt(num2));
                 }
                 if (minusBtn) {
                     output.setText(String.valueOf(Integer.parseInt(num1) - Integer.parseInt(num2)));
+                    ans = String.valueOf(Integer.parseInt(num1) - Integer.parseInt(num2));
                 }
                 if (timesBtn) {
                     output.setText(String.valueOf(Integer.parseInt(num1) * Integer.parseInt(num2)));
+                    ans = String.valueOf(Integer.parseInt(num1) - Integer.parseInt(num2));
                 }
                 if (divideBtn) {
                     output.setText(String.valueOf(Double.parseDouble(num1) /  Double.parseDouble(num2)));
+                    ans = String.valueOf(Integer.parseInt(num1) - Integer.parseInt(num2));
                 }
                 if (sqrtBtn) {
                     output.setText(String.valueOf(Math.sqrt(Double.parseDouble(num1))));
+                    ans = String.valueOf(Math.sqrt(Double.parseDouble(num1)));
                 }
 
+                num1 = "";
+                num2 = "";
                 addBtn = false;
                 minusBtn = false;
                 timesBtn = false;
